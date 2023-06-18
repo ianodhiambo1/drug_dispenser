@@ -1,0 +1,146 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    background-color:#6ede6aba;
+    font-family: 'Arial';
+}
+.page{
+        width: 382px;
+        overflow: hidden;
+        margin: auto;
+        margin: 20 0 0 450px;
+        padding: 80px;
+        background: #23462d;
+        border-radius: 15px ;
+
+}
+h2{
+    text-align: center;
+    color: #277582;
+    padding: 20px;
+}
+label{
+    color: #08ffd1;
+    font-size: 17px;
+}
+#Uname{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 8px;
+}
+#password, #email{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 8px;
+
+}
+#log{
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    color: rgb(0, 0, 0);
+    &&:hover{
+        background-color: black;
+        color: white;
+    }
+
+
+}
+.btn{
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    &&:hover{
+        background-color: rgb(151, 151, 151);
+        color: white;
+    }
+}
+.btn a{
+    color: black;
+    text-decoration: none;
+}
+
+span{
+    color: white;
+    font-size: 17px;
+}
+.forgot{
+    float: right;
+    text-decoration: none;
+    color: #08ff14;
+    &&:hover{
+        text-decoration: underline;
+    }
+}
+.message{
+    position: sticky;
+    top:0; left:0; right:0;
+    padding:15px 10px;
+    background-color: whitesmoke;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: grey;
+    color: black;
+    font-size: 20px;
+    text-transform: capitalize;
+    cursor: pointer;
+ }
+nav {
+	background: #224ce1;
+	height: 80px;
+	width: 100%;
+}
+label.logo {
+	color: white;
+	font-size: 35px;
+	line-height: 80px;
+	padding: 0 100px;
+	font-weight: bold;
+}
+nav ul {
+	float: right;
+	margin-right: 20px;
+}
+nav ul li {
+	display: inline-block;
+	line-height: 80px;
+	margin: 0 5px;
+}
+nav ul li a {
+	color: white;
+	font-size: 17px;
+	padding: 7px 13px;
+	border-radius: 3px;
+	text-transform: uppercase;
+}
+a.active, a:hover {
+	background: #1d075f;
+	transition: .5s;
+}
+.checkbtn {
+	font-size: 30px;
+	color: white;
+	float: right;
+	line-height: 80px;
+	margin-right: 40px;
+	cursor: pointer;
+	display: none;
+}
+#check {
+	display: none;
+}
+.logout{
+    text-decoration: none;
+    border: solid black 2px;
+}
