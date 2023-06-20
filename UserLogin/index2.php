@@ -49,7 +49,7 @@ if(isset($message)){
       };
    ?>
    <div class="userInfo">
-      <a href="index.php?logout=<?php echo $user_id; ?>" 
+      <a href="index2.php?logout=<?php echo $user_id; ?>" 
          onclick="return confirm('are your sure you want to logout?');" class="logOut">Log out</a>
       <span><?php echo $fetch_user['name']; ?></span>
    </div>
