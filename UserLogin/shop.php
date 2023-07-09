@@ -18,7 +18,6 @@ if(isset($_POST['add_to_cart'])){
 
    $product_name = $_POST['product_name'];
    $product_price = $_POST['product_price'];
-   $product_image = $_POST['product_image'];
    $product_quantity = $_POST['product_quantity'];
 
    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
@@ -26,7 +25,7 @@ if(isset($_POST['add_to_cart'])){
    if(mysqli_num_rows($select_cart) > 0){
       $message[] = 'product already added to cart!';
    }else{
-      mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, image, quantity) VALUES('$user_id', '$product_name', '$product_price', '$product_image', '$product_quantity')") or die('query failed');
+      mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity')") or die('query failed');
       $message[] = 'product added to cart!';
    }
 
@@ -42,12 +41,12 @@ if(isset($_POST['update_cart'])){
 if(isset($_GET['remove'])){
    $remove_id = $_GET['remove'];
    mysqli_query($conn, "DELETE FROM `cart` WHERE id = '$remove_id'") or die('query failed');
-   header('location:index2.php');
+   header('location:shop.php');
 }
   
 if(isset($_GET['delete_all'])){
    mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-   header('location:index2.php');
+   header('location:shop.php');
 }
 
 ?>
@@ -105,17 +104,22 @@ if(isset($_GET['delete_all'])){
    <div class="box-container">
 
    <?php
-      $select_product = mysqli_query($conn, "SELECT * FROM `products`") or die('query failed');
+      $select_product = mysqli_query($conn, "SELECT * FROM `drug_info`") or die('query failed');
       if(mysqli_num_rows($select_product) > 0){
          while($fetch_product = mysqli_fetch_assoc($select_product)){
    ?>
       <form method="post" class="box" action="">
-         <div class="name"><?php echo $fetch_product['name']; ?></div>
-         <div class="price">$<?php echo $fetch_product['price']; ?>/-</div>
+         <?php $drId = $fetch_product['dr_id'];
+            $drName = $fetch_product['dr_name']; ?>
+         <div class="name"><?php echo "<a href='drug_details.php?dr_id=$drId'>$drName</a>"; ?></div>
+         <div class="description"><p>Symptoms:<br><?php echo $fetch_product['dr_symptoms']; ?></p></div>
+         <div class="price" >$<?php echo $fetch_product['dr_price']; ?>/-</div>
+         <div class="card-btn">
          <input type="number" min="1" name="product_quantity" value="1">
-         <input type="hidden" name="product_name" value="<?php echo $fetch_product['name']; ?>">
-         <input type="hidden" name="product_price" value="<?php echo $fetch_product['price']; ?>">
-         <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+         <input type="hidden" name="product_name" value="<?php echo $fetch_product['dr_name']; ?>">
+         <input type="hidden" name="product_price" value="<?php echo $fetch_product['dr_price']; ?>">
+         <input type="submit" value="add to cart" name="add_to_cart" class="add-btn">
+      </div>
       </form>
    <?php
       };
@@ -128,7 +132,7 @@ if(isset($_GET['delete_all'])){
 
 <div class="shopping-cart">
 
-   <h1 class="heading">shopping cart</h1>
+   <h1 class="heading">Shopping cart</h1>
 
    <table class="styled-table" >
       <thead>
@@ -158,8 +162,8 @@ if(isset($_GET['delete_all'])){
                   <input type="submit" name="update_cart" value="update" class="option-btn">
                </form>
             </td>
-            <td>$<?php echo $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</td>
-            <td><a href="index2.php?remove=<?php echo $fetch_cart['id']; ?>" class="delete-btn" onclick="return confirm('remove item from cart?');">remove</a></td>
+            <td>$<?php echo $sub_total = (((int)$fetch_cart['price']) * (int)$fetch_cart['quantity']); ?>/-</td>
+            <td><a href="shop.php?remove=<?php echo $fetch_cart['id']; ?>" class="delete-btn" onclick="return confirm('remove item from cart?');">remove</a></td>
          </tr>
       <?php
          $grand_total += $sub_total;
@@ -171,7 +175,7 @@ if(isset($_GET['delete_all'])){
       <tr class="table-bottom">
          <td colspan="4">grand total :</td>
          <td>$<?php echo $grand_total; ?>/-</td>
-         <td><a href="index2.php?delete_all" onclick="return confirm('delete all from cart?');" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">delete all</a></td>
+         <td><a href="shop.php?delete_all" onclick="return confirm('delete all from cart?');" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">delete all</a></td>
       </tr>
    </tbody>
    </table>
