@@ -437,3 +437,37 @@ input[type="number"] {
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
+.name, .price, .ingredients, .pharm-company{
+    width: 39.0625rem;
+height: 3.5625rem;
+flex-shrink: 0;
+border-radius: 0.25rem;
+background: #FFF;
+color: #000;
+font-family: Poppins;
+font-size: 1.5rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+
+}
+span{
+    color: black;
+    font-weight: 700;
+}
+.descript, .symptoms{
+    width: 39.0625rem;
+height: 7.6875rem;
+flex-shrink: 0;
+border-radius: 0.25rem;
+background: #FFF;
+font-size: 1.5rem;
+font-weight: 500;
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    align-content: space-between;
+    justify-content: space-between;
+}
