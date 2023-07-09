@@ -100,7 +100,7 @@ if(isset($_GET['delete_all'])){
 
 <div class="products">
 
-   <h1 class="heading">latest products</h1>
+   <h1 class="heading">Latest Products</h1>
 
    <div class="box-container">
 
@@ -110,7 +110,6 @@ if(isset($_GET['delete_all'])){
          while($fetch_product = mysqli_fetch_assoc($select_product)){
    ?>
       <form method="post" class="box" action="">
-         <img src="images/<?php echo $fetch_product['image']; ?>" alt="">
          <div class="name"><?php echo $fetch_product['name']; ?></div>
          <div class="price">$<?php echo $fetch_product['price']; ?>/-</div>
          <input type="number" min="1" name="product_quantity" value="1">

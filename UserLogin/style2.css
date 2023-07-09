@@ -3,6 +3,7 @@
    font-family: 'Poppins', sans-serif;
    margin:0; padding:0;
    text-decoration: none;
+   border: solid black 1px;
 }
 body
 {
@@ -279,9 +280,9 @@ nav{
     font-weight: 400;
     line-height: normal;
 }
-body{
+/* body{
     background-image: linear-gradient(to top, #2c73d2, #0081cc, #008ab6, #008e97, #008f7a);
-}
+} */
 .locations{
     display: flex;
     margin: auto 7em 0px 7em;
@@ -304,6 +305,34 @@ body{
     margin: auto 7em 0px 7em;
     padding-top: 12px;
 }
-*{
-    border: solid black 1px;
-}
+.message {
+    display: flex;
+    align-items: center;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+  }
+  
+  .message .icon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #721c24;
+  }
+  
+  .message.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+  }
+  
+  .message.error .icon {
+    color: #721c24;
+  }
+  .box{
+    display: flex;
+  }
+  
+

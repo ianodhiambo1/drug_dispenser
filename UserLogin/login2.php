@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
       $_SESSION['user_id'] = $row['id'];
       header('location:index2.php');
    }else{
-      $messages[] = 'incorrect password or email!';
+      $message[] = 'incorrect password or email!';
    }
 
 }
@@ -33,12 +33,12 @@ if(isset($_POST['submit'])){
     <h2>Login Page</h2><br>
     <div class="page">
     <?php
-    if(isset($message)){
-        foreach($messages as $message){
-      echo '<div class="message" onclick="this.remove();">'.$message.'</div>';
+        if(isset($message)){
+           foreach($message as $message){
+              echo '<div class="message" onclick="this.remove();">'.$message.'</div>';
+           }
         }
-     }
-    ?>
+        ?>
     <form id="login" method="post" action="login2.php">
         <label><b>User Name
         </b>
