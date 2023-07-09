@@ -3,7 +3,7 @@
    font-family: 'Poppins', sans-serif;
    margin:0; padding:0;
    text-decoration: none;
-   border: solid black 1px;
+
 }
 body
 {
@@ -180,7 +180,7 @@ nav{
 }
 .hero-image{
     background: center/100% no-repeat
-     url(images/hero.png);
+     url(images/image.jpg);
      height: 600px;
      width: 600px;
      margin-right: 14em;
@@ -280,9 +280,9 @@ nav{
     font-weight: 400;
     line-height: normal;
 }
-/* body{
+body{
     background-image: linear-gradient(to top, #2c73d2, #0081cc, #008ab6, #008e97, #008f7a);
-} */
+}
 .locations{
     display: flex;
     margin: auto 7em 0px 7em;
@@ -332,7 +332,35 @@ nav{
     color: #721c24;
   }
   .box{
-    display: flex;
+    border: solid black 1px ;
+    border-radius: 4px;
+    text-align: center;
   }
-  
+ .box-container{
+    display:flex;
+    justify-content: space-between;
+ } 
 
+input[type="number"] {
+    width: 100px;
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}

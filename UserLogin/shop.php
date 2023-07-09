@@ -61,7 +61,7 @@ if(isset($_GET['delete_all'])){
    <title>shopping cart</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="./style2.css">
+   <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
@@ -113,7 +113,6 @@ if(isset($_GET['delete_all'])){
          <div class="name"><?php echo $fetch_product['name']; ?></div>
          <div class="price">$<?php echo $fetch_product['price']; ?>/-</div>
          <input type="number" min="1" name="product_quantity" value="1">
-         <input type="hidden" name="product_image" value="<?php echo $fetch_product['image']; ?>">
          <input type="hidden" name="product_name" value="<?php echo $fetch_product['name']; ?>">
          <input type="hidden" name="product_price" value="<?php echo $fetch_product['price']; ?>">
          <input type="submit" value="add to cart" name="add_to_cart" class="btn">
@@ -131,7 +130,7 @@ if(isset($_GET['delete_all'])){
 
    <h1 class="heading">shopping cart</h1>
 
-   <table>
+   <table class="styled-table" >
       <thead>
          <th>#</th>
          <th>name</th>
