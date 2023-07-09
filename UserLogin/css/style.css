@@ -437,7 +437,7 @@ input[type="number"] {
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
-.name, .price, .ingredients, .pharm-company{
+ .price-details, .ingredients, .pharm-company{
     width: 39.0625rem;
 height: 3.5625rem;
 flex-shrink: 0;
@@ -449,7 +449,25 @@ font-size: 1.5rem;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
+margin-left: 2em;
+padding: 10px;
 
+}
+
+.name-details{
+    width: 39.0625rem;
+    text-align: center;
+    flex-shrink: 0;
+    border-radius: 0.25rem;
+    background: #FFF;
+    color: #000;
+    font-family: Poppins;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 2em; 
+    padding: 10px;
 }
 span{
     color: black;
@@ -457,17 +475,37 @@ span{
 }
 .descript, .symptoms{
     width: 39.0625rem;
-height: 7.6875rem;
-flex-shrink: 0;
-border-radius: 0.25rem;
-background: #FFF;
-font-size: 1.5rem;
-font-weight: 500;
+    height: 7.6875rem;
+    flex-shrink: 0;
+    border-radius: 0.25rem;
+    background: #FFF;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-left: 2em;
+    padding: 10px;
+}
+.price-details{
+    background-color: #a3ffa7;
+}
+.descript{
+    background-color: #a3acff;
+}
+.pharm-company{
+    background-color: #567dff;
+}
+.symptoms{
+    background-color: #ffc2a3;
+}
+.ingredients{
+    background-color: #a3e5ff;
+}
+.name-details{
+    background-color: #5eff89;
 }
 .details{
     display: flex;
     flex-direction: column;
-    height: 50vh;
+    height: 60vh;
     align-content: space-between;
-    justify-content: space-between;
+    justify-content: space-around;
 }
