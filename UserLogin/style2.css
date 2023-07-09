@@ -300,3 +300,10 @@ body{
 .locations p{
     width: 80%;
 }
+.shopping-cart,  .products{
+    margin: auto 7em 0px 7em;
+    padding-top: 12px;
+}
+*{
+    border: solid black 1px;
+}

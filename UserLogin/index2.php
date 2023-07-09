@@ -32,7 +32,7 @@ if(isset($_GET['logout'])){
 <?php
 if(isset($message)){
    foreach($messages as $message){
-      echo '<div class="message" onclick="this.remove();">'.$message.'</div>';
+      echo '<div class="message" id="hideMe" onclick="this.remove();">'.$message.'</div>';
    }
 }
 ?>
