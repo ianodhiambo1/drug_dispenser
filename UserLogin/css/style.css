@@ -505,7 +505,9 @@ span{
 .details{
     display: flex;
     flex-direction: column;
-    height: 60vh;
-    align-content: space-between;
+    height: 80vh;
+    align-content: space-around;
     justify-content: space-around;
+    margin-top: 70px;
+    margin-left: 5em;
 }
