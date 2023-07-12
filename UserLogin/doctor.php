@@ -1,23 +1,12 @@
 <?php
    
    include 'config.php';
-
-
-
-
-
-
-
    if(isset($message)){
     foreach((array)$message as $message){
        echo '<div class="message" onclick="this.remove();">'.$message.'</div>';
     }
  }
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
