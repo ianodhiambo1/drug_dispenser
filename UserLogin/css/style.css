@@ -178,11 +178,9 @@ nav{
     display: flex;
     justify-content: space-between;
 }
-.hero-image{
-    background: center/100% no-repeat
-     url(images/image.jpg);
-     height: 600px;
-     width: 600px;
+.hero-image img{
+     height: 30em;
+     width: 30em;
      margin-right: 14em;
 
 }
@@ -255,7 +253,7 @@ nav{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
+    margin-top: 100px;
 }
 .card svg{
      width: 200px;
@@ -281,7 +279,7 @@ nav{
     line-height: normal;
 }
 body{
-    background-image: linear-gradient(to top, #2c73d2, #0081cc, #008ab6, #008e97, #008f7a);
+    background-color: #0e2031;
 }
 .locations{
     display: flex;
@@ -510,4 +508,27 @@ span{
     justify-content: space-around;
     margin-top: 70px;
     margin-left: 5em;
+}
+.diagnosis{
+    background-color: white;
+    width: 600px;
+    height: 500px;
+    padding-left: 2em;
+    margin-left: 2em;
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.patient-name{
+    background-color: #009879;
+    width: 100%;
+    padding-left: 0;
+    text-align: center;
+
+}
+#diagnosis input[text]{
+    width: 100px;
 }

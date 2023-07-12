@@ -80,6 +80,7 @@ if(isset($message)){
 
    </div>
    <div class="hero-image">
+      <img src="images/hero.png" alt="">
       
    </div>
 </div>

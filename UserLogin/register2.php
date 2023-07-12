@@ -5,6 +5,13 @@ include 'config.php';
 if(isset($_POST['submit'])){
 
    $name = mysqli_real_escape_string($conn, $_POST['Uname']);
+   $Fname = mysqli_real_escape_string($conn, $_POST['Fname']);
+   $Lname = mysqli_real_escape_string($conn, $_POST['Lname']);
+   $dob = $_POST['dob'];
+// Calculate the age based on the date of birth
+    $currentDate = date('Y-m-d');
+    $age = date_diff(date_create($dob), date_create($currentDate))->y;
+   $address = mysqli_real_escape_string($conn, $_POST['address']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
 
@@ -13,7 +20,7 @@ if(isset($_POST['submit'])){
    if(mysqli_num_rows($select) > 0){
       $messages[] = 'user already exist!';
    }else{
-      mysqli_query($conn, "INSERT INTO `user_info`(name, email, password) VALUES('$name', '$email', '$pass')") or die('query failed');
+      mysqli_query($conn, "INSERT INTO `user_info`(name, email, password,fName,lName,age,address) VALUES('$name', '$email', '$pass','$Fname','$Lname','$age','$address')") or die('query failed');
       $messages[] = 'registered successfully!';
       header('location:login2.php');
    }
@@ -26,7 +33,7 @@ if(isset($_POST['submit'])){
 <html>
 <head>
     <title>Sign Up Form</title>
-    <link rel="stylesheet" type="text/css" href="style2.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
     <h2>Sign Up Page</h2><br>
@@ -43,6 +50,26 @@ if(isset($_POST['submit'])){
         </b>
         </label>
         <input type="text" name="Uname" id="Uname" placeholder="Username" required>
+        <br><br>
+        <label><b>First Name
+        </b>
+        </label>
+        <input type="text" name="Fname" id="Uname" placeholder="First Name" required>
+        <br><br>
+        <label><b>Last Name
+        </b>
+        </label>
+        <input type="text" name="Lname" id="Uname" placeholder="Last Name" required>
+        <br><br>
+        <label><b>Date Of Birth
+        </b><br>
+        </label>
+        <input type="date" name="dob" required>
+        <br><br>
+        <label><b>Address
+        </b>
+        </label>
+        <input type="text" name="address" id="Uname" placeholder="Address" required>
         <br><br>
         <label><b>Email
         </b><br>

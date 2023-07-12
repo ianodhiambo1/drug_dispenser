@@ -43,7 +43,7 @@
 
         <?php
         if(isset($message)){
-           foreach($message as $message){
+           foreach((array)$message as $message){
               echo '<div class="message" onclick="this.remove();">'.$message.'</div>';
            }
         }
