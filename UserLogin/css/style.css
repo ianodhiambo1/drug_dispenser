@@ -10,7 +10,6 @@ body
     margin: 0;
     padding: 0;
     background-color:white;
-    font-family: 'Arial';
 }
 .page{
         width: 382px;
@@ -247,7 +246,7 @@ nav{
     width: 294px;
     height: 306px;
     flex-shrink: 0;
-    border-radius: 2px;
+    border-radius: 8px;
     background: #bbe8f7;
     display: flex;
     flex-direction: column;
@@ -277,9 +276,6 @@ nav{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-}
-body{
-    background-color: #0e2031;
 }
 .locations{
     display: flex;
@@ -529,6 +525,90 @@ span{
     text-align: center;
 
 }
-#diagnosis input[text]{
-    width: 100px;
+#diagnosis {
+    width: 500px;
+    margin: 0 auto;
+    border: solid black 1px;
+}
+
+/* Style for labels */
+#diagnosis label {
+    font-weight: bold;
+}
+
+/* Style for input fields */
+#diagnosis input[type="text"] {
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+#diagnosis textarea{
+    width: 300px;
+    height: 100px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Style for submit button */
+#diagnosis input[type="submit"] {
+    width: 200px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+}
+
+/* Hover effect for submit button */
+#diagnosis input[type="submit"]:hover {
+    background-color: #45a049;
+}
+.prescription-table{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
+    border: solid 1px black;
+    width: 80vw;
+    height: 60vh;
+    flex-shrink: 0;
+    padding: 20px;
+    background: #D9D9D9;
+}
+.boxP{
+    width: 66.8125rem;
+height: auto;
+flex-shrink: 0;
+background: #FFF;
+border: solid 1px black;
+margin-left: 5em;
+border-radius: 4px;
+}
+.boxP p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-left: 1em;
+    padding: 10px;
+
+}
+
+.boxP span{
+    color: black;
+    font-weight: 700;
+    margin-left: 1em;
+    padding: 10px;
+
+}
+.shop-button{
+    color: black;
+    font-weight: 700;
+    margin-left: 4em;
+    padding: 10px;
+    width: 200px;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    border-radius:4px ;
+
 }
