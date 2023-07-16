@@ -1,35 +1,70 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve the username and password from the form submission
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    // Validate the username and password (you can add more checks here)
-    if ($username === 'admin' && $password === 'password') {
-        // Redirect to the home page or do any other desired operation
-        header('Location: home.php');
-        exit();
+include 'connect.php';
+session_start();
+
+if(isset($_POST['submit'])){
+
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+// Prepare and bind the SQL statement
+$stmt = $conn->prepare("SELECT * FROM user_info WHERE email = '$email' and password = 'password' ");
+$stmt->bind_param("s", $email);
+
+// Execute the prepared statement
+$stmt->execute();
+
+// Get the result
+$result = $stmt->get_result();
+
+// Check if the user exists
+if ($result->num_rows == 1) {
+    $row = $result->fetch_assoc();
+    $storedPassword = $row['password'];
+
+    // Verify the password
+    if (password_verify($password, $storedPassword)) {
+        // Password is correct, perform login actions
+        echo "Login successful!";
+        header('location:Doctors.php');
     } else {
-        // Login failed
-        echo 'Invalid username or password. Please try again.';
+        // Invalid password
+        echo "Invalid password";
     }
+} else {
+    // User does not exist
+    echo "User not found";
+    
+}
+
+
+
+// Close the statement and database connection
+$stmt->close();
+$conn->close();
+
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-<link rel ="styleheat" href="Style.css">
+
 <body>
+
+<link rel ="stylesheet" href="style.css">
 <div class="container">
         <h2>Login</h2>
         <form method="post" action="login.php">
             <label for="email">Email</label>
-            <input type="text" name="username" id="username" required>
+            <input type="text" name="email" id="email" required>
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+            <input type="text" name="password" id="password" required>
             <input type="submit" value="Login">
-            <input type="submit" value="Signup">
+            
         </form>
+        Dont have a login? Sign up <a href = "signup.php">here</a>
+
     </div>
 </body>
 </html>

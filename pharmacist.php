@@ -21,9 +21,9 @@ try {
 }
 
 
-$query = "SELECT * FROM patients";
-$stmt = $conn->query($query);
-$patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$query = "SELECT * FROM drug_info";
+$stmt = $pdo->query($query);
+$drug_info = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -38,7 +38,7 @@ $patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-    <title>Doctors Homepage</title>
+    <title>Phamracist Homepage</title>
     <link rel ="styleheat" href="style.css">
 
 
@@ -66,33 +66,39 @@ $patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 <link rel ="stylesheet" href="style.css">
-<h1>Doctors Homepage</h1>
-    <h2>List of Patients</h2>
+<h1>Pharmacist Homepage</h1>
+    <h2>List of Drugs</h2>
 
 
  
 <!-- To dispaly the table -->
-    <?php if (empty($patients)): ?>
-        <p>No patients found.</p>
+    <?php if (empty($drug_info)): ?>
+        <p>No Drugs found.</p>
     <?php else: ?>
         <table>
             <thead>
                 <tr>
-                <th>Patient ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                   
+                <th>Drug ID</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Symptoms</th>
+                    <th>Ingredients</th>
                 </tr>
             </thead>
             <tbody>
 
 
-                <?php foreach ($patients as $patient): ?>
+                <?php foreach ($drug_info as $drug): ?>
                     <tr>
-                    <td><?php echo $patient['pt_ID']; ?></td>
-                        <td><?php echo $patient['pt_fname']; ?></td>
-                        <td><?php echo $patient['pt_lname']; ?></td>
-                        
+                    <td><?php echo $drug['dr_id']; ?></td>
+                        <td><?php echo $drug['dr_name']; ?></td>
+                        <td><?php echo $drug['dr_pharmCompany']; ?></td>
+                        <td><?php echo $drug['dr_description']; ?></td>
+                        <td><?php echo $drug['dr_price']; ?></td>
+                        <td><?php echo $drug['dr_symptoms']; ?></td>
+                        <td><?php echo $drug['dr_ingredients']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -103,8 +109,7 @@ $patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     
 
-    <button class = "addpatient"><a href = "addpatient.php"> Add Patient</a></button>
+    <button class = "addpatient"><a href = "adddrug.php"> Add Drug</a></button>
 
 </body>
 </html>
-
