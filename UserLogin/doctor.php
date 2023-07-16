@@ -1,4 +1,16 @@
 <?php
+   session_start();
+   $user_id = $_SESSION['doctor_id'];
+   
+   if(!isset($user_id)){
+      header('location:doctor_login.php');
+   };
+   
+   if(isset($_GET['logout'])){
+      unset($user_id);
+      session_destroy();
+      header('location:doctor_login.php');
+   };
    
    include 'config.php';
    if(isset($message)){
@@ -38,9 +50,55 @@
         .name a:hover {
             text-decoration: underline;
         }
+        .navbar {
+        background-color: grey;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        width: 500px;
+        margin: 10px auto;
+        border: solid white 1px;
+        border-radius: 6px;
+    }
+
+    .navbar-brand {
+
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .navbar-username {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .navbar-logout {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        font-size: 14px;
+        cursor: pointer;
+        text-decoration: none;
+    }
     </style>
 </head>
 <body>
+<?php
+      $select_user = mysqli_query($conn, "SELECT * FROM `doctors` 
+      WHERE doctor_id = '$user_id'") or die('query failed');
+      if(mysqli_num_rows($select_user) > 0){
+         $fetch_user = mysqli_fetch_assoc($select_user);
+      };
+   ?>
+<div class="navbar">
+    <span class="navbar-brand">Doctor Dashboard</span>
+    <a class="navbar-logout" href="doctor.php?logout=<?php echo $user_id; ?>" 
+         onclick="return confirm('are your sure you want to logout?');" class="logOut">Log out</a>
+      <span class="navbar-username"><?php echo $fetch_user['doctor_username']; ?></span>
+</div>
 
 <h1>List of Patients</h1>
 
