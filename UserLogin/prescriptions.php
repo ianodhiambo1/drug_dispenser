@@ -77,7 +77,31 @@ $user_id = $_SESSION['user_id'];
         </div>
         <div class="listODrugs-box boxP">
         <span class="title">List Of Drugs</span>
-            <p><?php echo $fetch_presc['pr_ListOdrugs']; ?></p>
+            <p><?php // Assume the array of drug IDs is $drugIds
+                    $drugIdsString = $fetch_presc['pr_ListOdrugs'];
+
+                    // Convert the array to a comma-separated string
+                    
+
+                    // Prepare the SQL statement to retrieve drugs with matching IDs
+                    $sql = "SELECT * FROM drug_info WHERE dr_id IN ($drugIdsString)";
+
+                    // Execute the SQL query
+                    $result = mysqli_query($conn, $sql);
+
+                    // Check if any matching drugs were found
+                    if (mysqli_num_rows($result) > 0) {
+                        // Loop through the query results
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            // Display the drug information
+                            echo $row['dr_name'] . "<br>";
+                            // Add more code here to display other drug information as desired
+                        }
+                    } else {
+                        // No matching drugs found
+                        echo "No drugs found.";
+                    }
+                ?></p>
         </div>
         <div class="listODrugs-box boxP">
         <span class="title">Date</span>

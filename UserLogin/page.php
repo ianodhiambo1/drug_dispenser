@@ -2,9 +2,10 @@
 include('config.php');
 $query = "SELECT pt_ID, pt_fname, pt_lname, pt_age, pt_address FROM patients";
 $result = mysqli_query($conn, $query);
+
 ?>
 <head>
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
   <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
   <style>
@@ -38,7 +39,7 @@ $result = mysqli_query($conn, $query);
 <body>
   <button class="action" ><a style="color: black;" href="add_patients.php">Add Patient</a></button>
   
-  <table border ="1" cellspacing="0" cellpadding="10" id="myTable">
+  <table border ="1" cellspacing="0" cellpadding="10" id="myTable" class="styled-table">
     <tr>
       <th>S.N</th>
       <th>First Name</th>
