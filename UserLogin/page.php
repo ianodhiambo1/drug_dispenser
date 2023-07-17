@@ -2,9 +2,12 @@
 include('config.php');
 $query = "SELECT pt_ID, pt_fname, pt_lname, pt_age, pt_address FROM patients";
 $result = mysqli_query($conn, $query);
+$selectQuery = "SELECT * FROM drug_info";
+$result2 = mysqli_query($conn, $selectQuery);
+
 ?>
 <head>
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
   <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
   <style>
@@ -32,13 +35,28 @@ $result = mysqli_query($conn, $query);
     font-size: medium; 
     cursor: pointer; 
     padding:10px; 
+
 }
+.action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .action-buttons a {
+            margin-right: 5px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .action-buttons a:hover {
+            text-decoration: underline;
+        }
   </style>
 </head>
 <body>
   <button class="action" ><a style="color: black;" href="add_patients.php">Add Patient</a></button>
   
-  <table border ="1" cellspacing="0" cellpadding="10" id="myTable">
+  <table id="myTable" class="styled-table">
     <tr>
       <th>S.N</th>
       <th>First Name</th>
@@ -59,7 +77,6 @@ $result = mysqli_query($conn, $query);
       header("Location: update_page.php?id=$id");
       exit();
     }
-
 if (mysqli_num_rows($result) > 0) {
   while($data = mysqli_fetch_assoc($result)) {
     ?>
@@ -69,7 +86,7 @@ if (mysqli_num_rows($result) > 0) {
    <td><?php echo $data['pt_lname']; ?> </td>
    <td><?php echo $data['pt_age']; ?> </td>
    <td><?php echo $data['pt_address']; ?> </td>
-   <td><form method='POST' onsubmit="return confirm('Are you sure you want to modify this record?')">
+   <td><form method='POST' onsubmit="return confirm('Are you sure you want to modify this record?')" >
               <button type='submit' name='delete' value="<?php echo $data['pt_ID']; ?> "  class="action">Delete</button>
               <button type='submit' name='update' value="<?php echo $data['pt_ID']; ?> " class="action">Update</button>
               </form></td>
@@ -83,6 +100,8 @@ if (mysqli_num_rows($result) > 0) {
     <?php } ?>
   </table>
   <div class="pagination"></div>
+ <a href="drug_info.php"> <h2 >Drug Information</h2></a>
+    
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

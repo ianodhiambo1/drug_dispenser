@@ -8,13 +8,31 @@
         global $userId;
         $pr_name= mysqli_real_escape_string($conn, $_POST['name']);
         $pr_diagnosis = mysqli_real_escape_string($conn, $_POST['Diagnosis']);
-        $pr_ListOdrugs = mysqli_real_escape_string($conn, $_POST['listODrugs']);
+        $selectedDrugs = $_POST['selected_drugs'];
+        $selectedDrugsString = implode(',', $selectedDrugs);
+
         $pr_AdditonalInfo = mysqli_real_escape_string($conn, $_POST['AdditionalInfo']);
         $pr_date_written= date('Y-m-d');
-        $sql = "INSERT INTO `prescription`(pr_name, pr_diagnosis, pr_ListOdrugs, pr_AdditonalInfo, patient_id, pr_date_written) VALUES('$pr_name', '$pr_diagnosis', '$pr_ListOdrugs', '$pr_AdditonalInfo', '$userId', '$pr_date_written')";
-        $insertResult = mysqli_query($conn, $sql);
-        $message[] = ($insertResult) ? 'Prescription submitted successfully!' : 'Failed to submit the prescription.';
-        
+        $sql = "INSERT INTO `prescription`(pr_name, pr_diagnosis, pr_ListOdrugs, pr_AdditonalInfo, patient_id, pr_date_written) VALUES('$pr_name', '$pr_diagnosis', '$selectedDrugsString', '$pr_AdditonalInfo', '$userId', '$pr_date_written')";
+        if (mysqli_query($conn, $sql)) {
+            $prescriptionId = mysqli_insert_id($conn);
+            
+            // Prescription added successfully, now process the selected drugs
+            foreach ($selectedDrugs as $drugId) {
+                // Prepare the SQL statement to insert the drug prescription into the database
+                $sqlDrug = "INSERT INTO PrescriptionDrugs (prescription_id, drug_id) VALUES ('$prescriptionId', '$drugId')";
+                mysqli_query($conn, $sqlDrug);
+            }
+
+            // Redirect to a success page
+            echo "<script>alert('Prescription submitted successfully!')</script>";
+            header("Location: doctor.php");
+            exit();
+        } else {
+            // Error occurred, redirect to an error page
+            header("Location: error.php");
+            exit();
+        }
         
     
 }
@@ -50,10 +68,8 @@
         </label>
         <textarea name="Diagnosis" id="Diagnosis" required></textarea>  
         <br><br>
-        <label><b>List Of Drugs
-            </b><br>
-        </label>
-        <textarea name="listODrugs" id="listODrugs" required></textarea>  
+        <label><b>List Of Drugs:</b><br></label>
+        <div id="drug_list"></div>
         <br><br>
         <label><b>Additional Info
             </b><br>
@@ -64,6 +80,56 @@
         <br><br>
     </form>
 </div>
+
+<script>
+
+    // Wait for the DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the drug list container element
+  const drugListContainer = document.getElementById('drug_list');
+
+  // Perform AJAX request to retrieve drug list
+  // Replace the AJAX URL with your actual server-side endpoint
+  const ajaxURL = 'get_drug_list.php';
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('GET', ajaxURL, true);
+
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      // Parse the JSON response
+      const response = JSON.parse(xhr.responseText);
+
+      // Populate the drug list
+      if (response.length > 0) {
+        response.forEach(function(drug) {
+          addDrugCheckbox(drug);
+        });
+      }
+    }
+  };
+
+  xhr.send();
+
+  // Function to add a drug checkbox to the list
+  function addDrugCheckbox(drug) {
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.name = 'selected_drugs[]';
+    checkbox.value = drug.id;
+
+    const label = document.createElement('label');
+    label.textContent = drug.name;
+
+    const drugListItem = document.createElement('div');
+    drugListItem.appendChild(checkbox);
+    drugListItem.appendChild(label);
+
+    drugListContainer.appendChild(drugListItem);
+  }
+});
+
+</script>
 
 </body>
 </html>
