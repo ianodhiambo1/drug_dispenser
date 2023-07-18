@@ -1,8 +1,8 @@
 <?php
 
-include "connect.php";
+include "config.php";
 
-$select = mysqli_query($conn, "SELECT * FROM `dispensed drugs`") or die('Query failed');
+$select = mysqli_query($conn, "SELECT * FROM `dispensed_drugs`") or die('Query failed');
 
 
 
@@ -14,7 +14,7 @@ $select = mysqli_query($conn, "SELECT * FROM `dispensed drugs`") or die('Query f
     <head>
         <title>History</title>
         
-        <header>
+        <header style="height:50px;">
             <h1>
             History
 </h1>
@@ -41,7 +41,7 @@ $select = mysqli_query($conn, "SELECT * FROM `dispensed drugs`") or die('Query f
             
             <?php while ($h = mysqli_fetch_assoc($select)): ?>
     <tr>
-        <td><?php echo $h['DD_Id']; ?></td>
+        <td><?php echo $h['DD_id']; ?></td>
         <td><?php echo $h['DD_pt_id']; ?></td>
         <td><?php echo $h['DD_List']; ?></td>
         <td><?php echo $h['DD_Date']; ?></td>

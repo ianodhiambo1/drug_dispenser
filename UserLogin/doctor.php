@@ -25,6 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel ="styleheat" href="style3.css">
     <style>
         h1 {
             color: #333;
@@ -119,4 +120,5 @@
 </ol>
 
 </body>
+
 </html>

@@ -85,7 +85,7 @@ $result_prices = mysqli_query($conn, $sql_prices);
         padding: 10px;
         display: flex;
         justify-content: space-between;
-        width: 500px;
+        width: 700px;
         margin: 10px auto;
         border: solid white 1px;
         border-radius: 6px;
@@ -125,6 +125,7 @@ $result_prices = mysqli_query($conn, $sql_prices);
    ?>
 <div class="navbar">
     <span class="navbar-brand">Pharmacist Dashboard</span>
+    <button onclick="window.location.href='history.php'">View History</button>
     <a class="navbar-logout" href="index2.php?logout=<?php echo $user_id; ?>" 
          onclick="return confirm('are your sure you want to logout?');" class="logOut">Log out</a>
       <span class="navbar-username"><?php echo $fetch_user['pharm_username']; ?></span>
@@ -141,6 +142,7 @@ $result_prices = mysqli_query($conn, $sql_prices);
                 <th>Diagnosis</th>
                 <th>List of Drugs</th>
                 <th>Additional Information</th>
+                <th>Patient ID</th>
                 <th>Date Written</th>
                 <th>Actions</th>
             </tr>
@@ -161,6 +163,7 @@ $result_prices = mysqli_query($conn, $sql_prices);
                     <td><?php echo $row['pr_diagnosis']; ?></td>
                     <td><?php echo $row['pr_ListOdrugs']; ?></td>
                     <td><?php echo $row['pr_AdditonalInfo']; ?></td>
+                    <td><?php echo $row['patient_id']; ?></td>
                     <td><?php echo $row['pr_date_written']; ?></td>
                     <td>
                         <?php while ($priceRow = mysqli_fetch_assoc($result_prices)) : ?>
@@ -201,6 +204,9 @@ $result_prices = mysqli_query($conn, $sql_prices);
     }
     ?>
 </ol>
+
+
+<button class="name" onclick="window.location.href='Dispense.php'">Dispense Drugs</button><br>
 
 </body>
 </html>

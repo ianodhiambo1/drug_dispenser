@@ -14,6 +14,8 @@ $result2 = mysqli_query($conn, $selectQuery);
     .pagination {
       display: inline-block;
     }
+    
+    
     .pagination a {
       color: black;
       float: left;

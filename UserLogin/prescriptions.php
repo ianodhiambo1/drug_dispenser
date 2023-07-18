@@ -18,6 +18,7 @@ $user_id = $_SESSION['user_id'];
     };
     $select= mysqli_query($conn,"SELECT * FROM `prescription` WHERE patient_id ='$user_id'") or die('query failed');
     
+    
 
 
 
@@ -94,9 +95,11 @@ $user_id = $_SESSION['user_id'];
                         // Loop through the query results
                         while ($row = mysqli_fetch_assoc($result)) {
                             // Display the drug information
-                            echo $row['dr_name'] . "<br>";
+                            echo $row['dr_name'] ." = $". $row['dr_price']. "<br>";
                             // Add more code here to display other drug information as desired
+                            $total = $row['dr_price'] + $row['dr_price'];
                         }
+                        echo "Total = $".$total;
                     } else {
                         // No matching drugs found
                         echo "No drugs found.";

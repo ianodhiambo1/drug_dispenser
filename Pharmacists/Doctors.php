@@ -1,7 +1,7 @@
 <?php
 include "connect.php";
 
-$query = my_sqli_query($conn,"SELECT * FROM patients") or die("query failed");
+$query = mysqli_query($conn,"SELECT * FROM patients") or die("query failed");
 
 $patients = ($query)
 

@@ -5,6 +5,7 @@
     <style>
         /* Add your CSS styling here */
     </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <?php
@@ -31,9 +32,10 @@
     ?>
 
     <nav>
-        <div class="navbar">
+        <div class="navbar" style="border: black solid 1px; width:fit-content; margin: 0 auto; padding-inline:10px;">
             <span class="admin-name"><?php echo $admin["admin_full_name"]; ?></span>
-            <a href="logout.php">Logout</a>
+            <a class="btn" href="logout.php">Logout</a>
+            <button><a href="add_drugs.php">Add Drugs</a></button>
         </div>
     </nav>
 
@@ -41,7 +43,7 @@
 
     <h3>Patient Data</h3>
 
-    <table>
+    <table class="styled-table">
         <thead>
             <tr>
                 <th>Patient ID</th>
