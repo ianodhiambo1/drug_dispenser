@@ -10,11 +10,21 @@ $select = mysqli_query($conn, "SELECT * FROM `dispensed drugs`") or die('Query f
 
 <!DOCTYPE html>
 <html>
-    <link rel ="stylesheet" href = "style.css">
+    <link rel ="stylesheet" href = "style3.css">
     <head>
         <title>History</title>
-        <h2>
-        <header>History</header></h2>
+        
+        <header>
+            <h1>
+            History
+</h1>
+
+            <div>
+            <button onclick="window.location.href='pharmacist.php'">Home</button>
+            <button onclick="window.location.href='login.php'">Log out</button>
+            <button onclick="window.location.href='Dispense.php'">Dispenser</button>
+        </div>
+        </header>
     </head>
     <body>
     <?php if (empty($select)): ?>
