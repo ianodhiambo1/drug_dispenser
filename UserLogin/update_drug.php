@@ -1,80 +1,133 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Update Drug - PHP</title>
-  <style>
-    label {
-      display: inline-block;
-      width: 100px;
-    }
-    input[type="text"] {
-      width: 700px;
-      height: 50px;
-    }
-    input[type="submit"] {
-      margin-top: 10px;
-      padding: 4px 8px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+    <title>Edit Drug Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical; /* Allows vertical resizing */
+        }
+
+        input[type="submit"] {
+            background-color: #394CFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2939B3;
+        }
+    </style>
 </head>
 <body>
-<?php
-// Database connection
-include('config.php');
+    <?php
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+        $drug_id = $_GET['id'];
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Retrieve the submitted values
-  $dr_id = $_POST["dr_id"];
-  $dr_name = $_POST["dr_name"];
-  $dr_pharmCompany = $_POST["dr_pharmCompany"];
-  $dr_description = $_POST["dr_description"];
-  $dr_price = $_POST["dr_price"];
-  $dr_symptoms = $_POST["dr_symptoms"];
-  $dr_ingredients = $_POST["dr_ingredients"];
+        // Assuming you have established a database connection ($conn)
+        include 'config.php';
+        // Retrieve the drug data from the database based on the ID
+        $select_drug = mysqli_query($conn, "SELECT * FROM `drug_info` WHERE `dr_id` = '$drug_id'");
+        $drug_data = mysqli_fetch_assoc($select_drug);
 
-  // Update the record in the database
-  $query = "UPDATE drug_info SET dr_name='$dr_name', dr_pharmCompany='$dr_pharmCompany', dr_description='$dr_description', dr_price='$dr_price', dr_symptoms='$dr_symptoms', dr_ingredients='$dr_ingredients' WHERE dr_id='$dr_id'";
+        if (!$drug_data) {
+            echo "Drug not found.";
+            exit;
+        }
+    } else {
+        echo "Invalid drug ID.";
+        exit;
+    }
 
-  if (mysqli_query($conn, $query)) {
-    echo "Record updated successfully.";
-  } else {
-    echo "Error updating record: " . mysqli_error($conn);
-  }
-}
+    // Handle the form submission for updating the drug
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        // Get the updated drug data from the form
+        $updated_dr_name = $_POST['dr_name'];
+        $updated_pharm_company = $_POST['dr_pharmCompany'];
+        $updated_dr_description = $_POST['dr_description'];
+        $updated_dr_price = $_POST['dr_price'];
+        $updated_dr_symptoms = $_POST['dr_symptoms'];
+        $updated_dr_ingredients = $_POST['dr_ingredients'];
 
-// Retrieve the dr_id value from the URL parameter
-$dr_id = $_GET["id"];
+        // Assuming you have established a database connection ($conn)
+        // Perform the update query
+        $update_query = "UPDATE `drug_info` SET 
+        `dr_name` = '$updated_dr_name',
+         `dr_pharmCompany` = '$updated_pharm_company',
+          `dr_description` ='$updated_dr_description',
+          `dr_symptoms` ='$updated_dr_symptoms',
+           `dr_price` ='$updated_dr_price', 
+           `dr_ingredients` ='$updated_dr_ingredients'
+                WHERE `dr_id` = '$drug_id'";
+        $result = mysqli_query($conn, $update_query);
 
-// Fetch the existing drug details
-$query = "SELECT * FROM drug_info WHERE dr_id='$dr_id'";
-$result = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($result);
+        if ($result) {
+            // Redirect to the drug listing page after successful update
+            header("Location: admin_home.php");
+            exit;
+        } else {
+            echo "Failed to update the drug. Please try again.";
+        }
+    }
+    ?>
 
-mysqli_close($conn);
-?>
+    <div class="container">
+        <h2>Edit Drug Information</h2>
+        <form action="" method="POST">
+            <label for="dr_name">Drug Name:</label>
+            <input type="text" id="dr_name" name="dr_name" value="<?php echo $drug_data['dr_name']; ?>" required><br><br>
 
-<h2>Update Drug</h2>
-<form method="POST" action="">
-  <input type="hidden" name="dr_id" value="<?php echo $row['dr_id']; ?>">
-  <label for="dr_name">Name:</label>
-  <input type="text" name="dr_name" value="<?php echo $row['dr_name']; ?>"><br>
-  <label for="dr_pharmCompany">Pharmaceutical Company:</label>
-  <input type="text" name="dr_pharmCompany" value="<?php echo $row['dr_pharmCompany']; ?>"><br>
+            <label for="dr_pharmCompany">Pharmaceutical Company:</label>
+  <input type="text" name="dr_pharmCompany" value="<?php echo $drug_data['dr_pharmCompany']; ?>"><br>
   <label for="dr_description">Description:</label>
-  <textarea name="dr_description"><?php echo $row['dr_description']; ?></textarea><br>
+  <textarea name="dr_description"><?php echo $drug_data['dr_description']; ?></textarea><br>
   <label for="dr_price">Price:</label>
-  <input type="text" name="dr_price" value="<?php echo $row['dr_price']; ?>"><br>
+  <input type="text" name="dr_price" value="<?php echo $drug_data['dr_price']; ?>"><br>
   <label for="dr_symptoms">Symptoms:</label>
-  <textarea name="dr_symptoms"><?php echo $row['dr_symptoms']; ?></textarea><br>
+  <textarea name="dr_symptoms"><?php echo $drug_data['dr_symptoms']; ?></textarea><br>
   <label for="dr_ingredients">Ingredients:</label>
-  <textarea name="dr_ingredients"><?php echo $row['dr_ingredients']; ?></textarea><br>
-  <input type="submit" value="Update">
-</form>
-
+  <textarea name="dr_ingredients"><?php echo $drug_data['dr_ingredients']; ?></textarea><br>
+            <input type="submit" value="Update">
+        </form>
+    </div>
 </body>
 </html>

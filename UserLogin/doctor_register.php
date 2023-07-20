@@ -60,13 +60,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $fullName = $_POST["fullName"];
+    $speciality = $_POST["speciality"];
+    $email = $_POST["email"];
 
     // Prepare and execute the query
-    $query = "INSERT INTO admins (admin_username, admin_password, admin_full_name) VALUES ('$username', '$password', '$fullName')";
+    $query = "INSERT INTO doctors (doctor_username, doctor_password, doctor_full_name, doctor_email, doctor_specialty) VALUES ('$username', '$password', '$fullName', '$email', '$speciality')";
 
     if (mysqli_query($conn, $query)) {
-        echo "Registration successful. You can now log in as an admin.";
-        header("Location: admin_login.php");
+        echo "Registration successful. You can now log in as an Doctor.";
+        header("Location: doctor_login.php");
     } else {
         echo "Error: " . mysqli_error($conn);
     }
@@ -76,7 +78,7 @@ mysqli_close($conn);
 ?>
 
 <div class="container">
-    <h2>Admin Registration</h2>
+    <h2>Doctor Registration</h2>
     <form method="POST" action="">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
@@ -86,6 +88,10 @@ mysqli_close($conn);
 
         <label for="fullName">Full Name:</label>
         <input type="text" id="fullName" name="fullName" required>
+        <label for="fullName">Email:</label>
+        <input type="text" id="email" name="email" required>
+        <label for="fullName">Speciality:</label>
+        <input type="text" id="fullName" name="speciality" required>
 
         <input type="submit" value="Register">
     </form>

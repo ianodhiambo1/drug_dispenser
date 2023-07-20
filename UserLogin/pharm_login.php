@@ -74,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <button type="submit">Login</button>
+            <button  > <a href="pharm_register.php">Sign up</a> </button>
         </form>
     </div>
 </body>

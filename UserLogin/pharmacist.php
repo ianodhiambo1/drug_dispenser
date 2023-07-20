@@ -144,7 +144,6 @@ $result_prices = mysqli_query($conn, $sql_prices);
                 <th>Additional Information</th>
                 <th>Patient ID</th>
                 <th>Date Written</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -165,13 +164,6 @@ $result_prices = mysqli_query($conn, $sql_prices);
                     <td><?php echo $row['pr_AdditonalInfo']; ?></td>
                     <td><?php echo $row['patient_id']; ?></td>
                     <td><?php echo $row['pr_date_written']; ?></td>
-                    <td>
-                        <?php while ($priceRow = mysqli_fetch_assoc($result_prices)) : ?>
-                            <?php if ($priceRow['dr_id'] == $row['pr_drug_id']) : ?>
-                                <p><?php echo $priceRow['dr_name']; ?> - $<?php echo $priceRow['dr_price']; ?></p>
-                            <?php endif; ?>
-                        <?php endwhile; ?>
-                    </td>
                 </tr>
                 <?php mysqli_data_seek($result_prices, 0); ?>
             <?php endwhile; ?>

@@ -25,6 +25,9 @@
     $query = "SELECT * FROM admins WHERE admin_id='$adminId'";
     $result = mysqli_query($conn, $query);
     $admin = mysqli_fetch_assoc($result);
+    $sql = "SELECT * FROM drug_info";
+    $resultQuery = mysqli_query($conn, $sql);
+    
 
     // Retrieve patient data
     $patientQuery = "SELECT * FROM patients";
@@ -38,11 +41,9 @@
             <button><a href="add_drugs.php">Add Drugs</a></button>
         </div>
     </nav>
-
     <h2>Welcome, <?php echo $admin["admin_full_name"]; ?></h2>
-
     <h3>Patient Data</h3>
-
+<div class="tables"  >
     <table class="styled-table">
         <thead>
             <tr>
@@ -65,6 +66,45 @@
             <?php endwhile; ?>
         </tbody>
     </table>
+    <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Drug ID</th>
+            <th>Name</th>
+            <th>Pharmaceutical Company</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Symptoms</th>
+            <th>Ingredients</th>
+            <th>Actions</th> <!-- New column for buttons -->
+        </tr>
+    </thead>
+    <tbody>
+        <?php while ($drug = mysqli_fetch_assoc($resultQuery)) : ?>
+            <tr>
+                <td><?php echo $drug["dr_id"]; ?></td>
+                <td><?php echo $drug["dr_name"]; ?></td>
+                <td><?php echo $drug["dr_pharmCompany"]; ?></td>
+                <td><?php echo $drug["dr_description"]; ?></td>
+                <td><?php echo $drug["dr_price"]; ?></td>
+                <td><?php echo $drug["dr_symptoms"]; ?></td>
+                <td><?php echo $drug["dr_ingredients"]; ?></td>
+                <td>
+                    <!-- Add buttons with links to the edit and delete pages -->
+                    <a href="update_drug.php?id=<?php echo $drug["dr_id"]; ?>">Update</a>
+                    <a href="delete_drug.php?id=<?php echo $drug["dr_id"]; ?>">Delete</a>
+                </td>
+            </tr>
+        <?php endwhile; ?>
+    </tbody>
+</table>
+
+
+
+
+</div>
+
+
 
     <?php mysqli_close($conn); ?>
 </body>
